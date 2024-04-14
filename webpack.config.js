@@ -4,6 +4,7 @@ const eslintplugin = require("eslint-webpack-plugin")
 const mincss = require("mini-css-extract-plugin")
 const minimizer = require("css-minimizer-webpack-plugin")
 const htmlwebpackplugin = require("html-webpack-plugin")
+//dist目录再分一层, 对应的文件类型放在对应的文件夹内 css->dist/css img->dist/img
 module.exports = {
     mode: "development", // 指定是生产还是开发，取值： development / production / none
 
@@ -23,6 +24,10 @@ module.exports = {
         // [name] 是指入库配置的name，[hash:4] 表示 生成哈希值并取前四位
         // filename: "[name].[hash:4].bundle.js" 如果想更精确的控制哈希, 可以使用 chunkhash
         filename: "[name].[chunkhash:4].bundle.js"
+
+        // 当需要把一些资源文件放到cdn上去的时候, 可以配置整个选项,
+        // 他会自动把这里配置的路径加到静态资源前面
+        // publicPath: "www.xxx.com"
     },
 
     // loader，存放在rules数组中，rules中每一个对象就是一个loader配置
@@ -72,7 +77,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [mincss.loader, "css-loader", "./mycss-loader"]
+                use: [mincss.loader, "css-loader"/*, "./mycss-loader"*/]
             },
             {
                 test: /\.less$/,
@@ -107,7 +112,7 @@ module.exports = {
                 },
                 generator: {
                     // [ext]表示后缀，此处 [ext] 为 ‘.png’
-                    filename: "[name][hash][ext]"
+                    filename: "./img/[name][hash][ext]"
                 }
             },
 
@@ -134,7 +139,9 @@ module.exports = {
     // 插件
     plugins: [
         new mincss({
-            filename: "test.bundle.css"
+            // 加一个 ./css/ 使得 css放入 dist/css 路径内,
+            // 如果其他类型文件也需要分类, 都是一样的写法
+            filename: "./css/test.bundle.css"
         }),
         // 用于css压缩
         new minimizer(),
@@ -238,5 +245,14 @@ module.exports = {
     },
 
     // 开发模式配置
-    devServer: {}
+    devServer: {},
+
+    resolve: {
+        // 别名
+        alias: {
+            "@css": "./css"
+        },
+        // 定义可省略的扩展名
+        extensions: [".css", ".js", ".json"]
+    }
 }
