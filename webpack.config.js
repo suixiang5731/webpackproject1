@@ -1,9 +1,16 @@
 // commonjs -- 该文件使用的
 // import export default -- 开发中使用的，比如a.js,app.js中
-const eslintplugin = require("eslint-webpack-plugin")
+const eslintplugin = require("eslint-webpack-plugin") // eslint插件
+/**
+ * 将CSS 代码从JavaScript 中分离出来，生成单独的CSS 文件。
+ * 使用mini-css-extract-plugin 可以避免将CSS 代码打包到JavaScript 文件中，
+ * 减少JavaScript 的体积，同时也可以使得CSS 文件可以被浏览器缓存，
+ * 提高页面加载速度
+ * @type {MiniCssExtractPlugin}
+ */
 const mincss = require("mini-css-extract-plugin")
-const minimizer = require("css-minimizer-webpack-plugin")
-const htmlwebpackplugin = require("html-webpack-plugin")
+const minimizer = require("css-minimizer-webpack-plugin") // css压缩插件
+const htmlwebpackplugin = require("html-webpack-plugin") // html打包插件
 //dist目录再分一层, 对应的文件类型放在对应的文件夹内 css->dist/css img->dist/img
 module.exports = {
     mode: "development", // 指定是生产还是开发，取值： development / production / none
