@@ -1,5 +1,5 @@
 // commonjs -- 该文件使用的
-// import export default -- 开发中使用的，比如a.js,app.js中
+// esmodule -- import export default -- 开发中使用的，比如a.js,app.js中
 const eslintplugin = require("eslint-webpack-plugin") // eslint插件
 /**
  * 将CSS 代码从JavaScript 中分离出来，生成单独的CSS 文件。
