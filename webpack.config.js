@@ -32,7 +32,7 @@ module.exports = {
         // filename: "[name].[hash:4].bundle.js" 如果想更精确的控制哈希, 可以使用 chunkhash
         filename: "[name].[chunkhash:4].bundle.js"
 
-        // 当需要把一些资源文件放到cdn上去的时候, 可以配置整个选项,
+        // 当需要把一些资源文件放到cdn上去的时候, 可以配置这个选项,
         // 他会自动把这里配置的路径加到静态资源前面
         // publicPath: "www.xxx.com"
     },
@@ -117,7 +117,7 @@ module.exports = {
                         maxSize: 5000
                     }
                 },
-                generator: {
+                generator: { // 输出设置
                     // [ext]表示后缀，此处 [ext] 为 ‘.png’
                     filename: "./img/[name][hash][ext]"
                 }
