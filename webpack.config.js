@@ -11,6 +11,8 @@ const eslintplugin = require("eslint-webpack-plugin") // eslint插件
 const mincss = require("mini-css-extract-plugin")
 const minimizer = require("css-minimizer-webpack-plugin") // css压缩插件
 const htmlwebpackplugin = require("html-webpack-plugin") // html打包插件
+// 自定义的手写插件
+const myplugin = require('./myplugin')
 //dist目录再分一层, 对应的文件类型放在对应的文件夹内 css->dist/css img->dist/img
 module.exports = {
     mode: "development", // 指定是生产还是开发，取值： development / production / none
@@ -28,7 +30,7 @@ module.exports = {
     output: {
         // __dirname 是nodejs中的一个变量，表示当前目录绝对路径的全局变量
         path: __dirname + "/dist",
-        // [name] 是指入库配置的name，[hash:4] 表示 生成哈希值并取前四位
+        // [name] 是指入口配置的name，[hash:4] 表示 生成哈希值并取前四位
         // filename: "[name].[hash:4].bundle.js" 如果想更精确的控制哈希, 可以使用 chunkhash
         filename: "[name].[chunkhash:4].bundle.js"
 
@@ -145,6 +147,7 @@ module.exports = {
 
     // 插件
     plugins: [
+        new myplugin(),
         new mincss({
             // 加一个 ./css/ 使得 css放入 dist/css 路径内,
             // 如果其他类型文件也需要分类, 都是一样的写法
