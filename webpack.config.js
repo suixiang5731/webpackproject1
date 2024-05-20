@@ -131,7 +131,7 @@ module.exports = {
                 loader: "url-loader",
                 options: {
                     limit: 5000,
-                    name: "[name][hash].[ext]"
+                    name: "[name][hash][ext]"
                 }
             },
             {
@@ -139,7 +139,7 @@ module.exports = {
                 loader: "url-loader",
                 options: {
                     limit: 5000,
-                    name: "[name][hash].[ext]"
+                    name: "[name][hash][ext]"
                 }
             }
         ]
